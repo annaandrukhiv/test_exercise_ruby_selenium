@@ -12,30 +12,29 @@ class BasicWebformPageTest < Test::Unit::TestCase
     @driver.manage.window.maximize
   end
 
-
   def teardown
    @driver.quit
   end
 
-  # Positive/Happy-flow test case that verifies that given web form is being successfully
+  # Positive/Happy-flow test case that verifies given web form is being successfully
   # submitted after filling in all question/information fields with proper values.
   def test_submit_form_happy_flow
     web_form_page = get_web_form_prefilled
-    web_form_page.submit_form
+    web_form_page.submit
     assert(BasicWebFormConfirmationPage.new(@driver)
                .get_confirmation_message_displayed)
   end
 
-  # Negative test case that checks required fields validation.
-  # Having filled in all question/information fields but then going back and
-  # clearing Name field (including 'press Enter' action), test verifies that
+  # Negative test case for checking required fields validation.
+  # Having filled in all question/information fields, going back and
+  # clearing Name field which is required (including 'press Enter' action), test verifies that
   # validation error message for the Name field appears and that form cannot be
-  # submitted without it.
+  # submitted.
   def test_required_fields_missing
     web_form_page = get_web_form_prefilled
     web_form_page.clear_name
     assert(web_form_page.get_name_field_missing_error_message_displayed)
-    web_form_page.submit_form
+    web_form_page.submit
     assert(web_form_page.get_web_form_displayed) #verifies remaining on the web form
     # ideally, after clicking submit button, it would be useful also to check/assert whether
     # validation error message is still being displayed. But since there seem to be bug

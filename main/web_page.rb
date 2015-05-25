@@ -4,11 +4,11 @@ require 'selenium-webdriver'
 # some common methods.
 class WebPage
 
+  MAX_WAITING_TIME = 10 #seconds
+
   def initialize(driver)
     @driver = driver
   end
-
-  MAX_WAITING_TIME = 10 #seconds
 
   def wait_timeout
     @wait = Selenium::WebDriver::Wait.new(:timeout => MAX_WAITING_TIME)
@@ -21,9 +21,5 @@ class WebPage
   def navigate_to_page(url)
     @driver.navigate.to url
   end
-
-  #def get_page_element_displayed(by, value)
-   # wait_timeout.until { @driver.find_element(by, value).displayed?  }
-   # end
 
 end

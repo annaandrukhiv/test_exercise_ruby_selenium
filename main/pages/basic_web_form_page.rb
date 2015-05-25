@@ -3,14 +3,14 @@ require_relative '../web_page'
 # Class for a given basic web form page.
 class BasicWebFormPage < WebPage
 
+  NAME = 'Hanna'
+  COMMENTS = 'Development and testing can not go without each other'
+  URL = 'https://docs.google.com/forms/d/181whJlBduFo5qtDbxkBDWHjNQML5RutvHWOCjEFWswY/viewform'
+
   def initialize(driver)
     @driver = driver
     navigate_to_page(URL)
   end
-
-  NAME = 'Hanna'
-  COMMENTS = 'Development and testing can not go without each other'
-  URL = 'https://docs.google.com/forms/d/181whJlBduFo5qtDbxkBDWHjNQML5RutvHWOCjEFWswY/viewform'
 
   def get_web_form_displayed
     get_page_element(:id, 'ss-form').displayed?
@@ -53,7 +53,7 @@ class BasicWebFormPage < WebPage
     get_comments_field.send_keys(COMMENTS)
   end
 
-  def submit_form
+  def submit
     get_submit_button.click
   end
 
